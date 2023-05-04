@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Store, StoreStatus, BusinessHours
+from .models import Store, StoreStatus, BusinessHours, Report
 
 
 class StoreSerializer(serializers.ModelSerializer):
@@ -20,11 +20,7 @@ class BusinessHoursSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ReportSerializer(serializers.Serializer):
-    store_id = serializers.CharField(max_length=100)
-    uptime_last_hour = serializers.FloatField()
-    uptime_last_day = serializers.FloatField()
-    uptime_last_week = serializers.FloatField()
-    downtime_last_hour = serializers.FloatField()
-    downtime_last_day = serializers.FloatField()
-    downtime_last_week = serializers.FloatField()
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'

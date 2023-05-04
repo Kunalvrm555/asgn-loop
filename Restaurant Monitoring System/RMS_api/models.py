@@ -1,7 +1,7 @@
 from django.db import models
 
 class Store(models.Model):
-    id = models.CharField(max_length=100, primary_key=True)
+    store_id = models.CharField(max_length=100, primary_key=True)
     timezone_str = models.CharField(max_length=100, default="America/Chicago")
 
 class StoreStatus(models.Model):
@@ -27,3 +27,13 @@ class BusinessHours(models.Model):
     day_of_week = models.PositiveSmallIntegerField(choices=WEEKDAYS)
     start_time_local = models.TimeField()
     end_time_local = models.TimeField()
+
+class Report(models.Model):
+    store= models.ForeignKey(Store, on_delete=models.CASCADE)
+    timestamp_utc = models.DateTimeField()
+    uptime_last_hour = models.PositiveSmallIntegerField()
+    downtime_last_hour = models.PositiveSmallIntegerField()
+    uptime_last_day = models.PositiveSmallIntegerField()
+    downtime_last_day = models.PositiveSmallIntegerField()
+    update_last_week = models.PositiveSmallIntegerField()
+
